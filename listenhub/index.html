@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一句话生成播客、PPT、视频：ListenHub CLI + Nexu 实战</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #fff; color: #333; font-family: -apple-system, "PingFang SC", "Helvetica Neue", sans-serif; max-width: 677px; margin: 0 auto; padding: 0; font-size: 16px; line-height: 1.8; }
+img { max-width: 100%; display: block; }
+.section-title { width: 100%; margin: 48px 0 24px; }
+.section-title img { width: 100%; }
+p { margin: 0 16px; padding: 8px 0; color: #3f3f3f; font-size: 15px; line-height: 2; }
+.lead { margin-top: 24px; }
+.code-block { margin: 16px 16px; padding: 16px 20px; background: #f6f7f8; border-radius: 4px; font-family: "SF Mono", "Fira Code", Menlo, monospace; font-size: 13px; line-height: 2; color: #333; overflow-x: auto; }
+.quote-block { margin: 20px 16px; padding: 16px 20px; background: #f0f7ff; border-left: 3px solid #1890ff; border-radius: 2px; font-size: 15px; line-height: 2; color: #3f3f3f; }
+.screenshot { margin: 24px auto; padding: 0 16px; }
+.screenshot img { width: 100%; border-radius: 6px; border: 1px solid #eee; }
+.slide-img { margin: 28px auto; padding: 0 16px; }
+.slide-img img { width: 100%; border-radius: 6px; }
+strong { color: #1a1a1a; }
+.footer { margin: 48px 16px 24px; text-align: center; }
+.footer p { text-align: center; color: #888; font-size: 14px; }
+.qr-wrap { margin: 20px auto; padding: 0 16px; max-width: 420px; }
+.qr-wrap img { width: 100%; border-radius: 8px; }
+.intro-line { font-size: 14px; color: #888; }
+.list-item { padding: 4px 0; }
+.bold-num { font-weight: 700; color: #1a1a1a; }
+a { color: #1890ff; text-decoration: none; }
+a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<p class="intro-line lead">nexu 是一个可以一键安装的开源 OpenClaw 桌面客户端，让你在本地用 AI 操控一切。</p>
+<p class="intro-line">GitHub → <a href="https://github.com/nexu-io/nexu">github.com/nexu-io/nexu</a>，觉得有用的话帮忙点个 Star 支持一下 🌟</p>
+
+<p style="padding-top:24px;">在 nexu 里对 agent 说一句话，<strong>它就能帮你生成一期完整的播客节目</strong>。不是那种机械朗读的 TTS，而是两个人有来有回、有观点有碰撞的深度对话。</p>
+
+<p>不只是播客——<strong>PPT、解说视频，在 nexu 里都是一句话的事。</strong> 你说需求，agent 帮你搞定从安装工具到交付成品的全流程。</p>
+
+<p style="padding-top:24px;"><strong>谁会用到？</strong></p>
+
+<p class="list-item">📝 <strong>自媒体博主</strong> — 一个选题同时产出文章、播客、短视频，一鱼三吃</p>
+<p class="list-item">🎓 <strong>培训讲师 / 教育工作者</strong> — 把课件和文档变成带配音的教学视频，5 分钟出片</p>
+<p class="list-item">🚀 <strong>产品经理 / 创业者</strong> — 快速生成产品介绍视频和 pitch deck 配音，不用求设计师</p>
+<p class="list-item">💻 <strong>技术博主 / 开发者</strong> — 技术文章一键转播客，让内容触达不看文字的受众</p>
+<p class="list-item">📊 <strong>知识工作者</strong> — 行业报告、竞品分析秒变解说 PPT，发给团队直接看</p>
+
+<p style="padding-top:8px;">下面用一个真实案例跑一遍完整流程。</p>
+
+<!-- ===== 我做了什么 ===== -->
+<div class="section-title"><img src="https://raw.githubusercontent.com/joeylee12629-star/article-assets/main/listenhub/section_1.jpg" /></div>
+
+<p>今天我用 nexu agent 完成了一套完整的内容生成流程：</p>
+
+<p><strong>输入</strong>：一句话描述主题——"Harness Engineering：AI驱动DevOps自动化"</p>
+
+<p><strong>输出</strong>：</p>
+<p class="list-item">🎙️ 一期 <strong>12 分钟</strong>的双人深度播客</p>
+<p class="list-item">📊 一份 <strong>5 页</strong>的解说 PPT（带 AI 配图 + 配音）</p>
+<p class="list-item">🎬 一个完整的解说视频</p>
+
+<p><strong>全程零手动操作，从输入到产出大概 5 分钟。</strong></p>
+
+<!-- ===== 怎么做到的 ===== -->
+<div class="section-title"><img src="https://raw.githubusercontent.com/joeylee12629-star/article-assets/main/listenhub/section_2.jpg" /></div>
+
+<p>核心工具是 <strong>ListenHub CLI</strong> —— 一个可以在终端运行的内容生成工具，支持播客、TTS、解说视频、PPT、AI 图片等多种格式。</p>
+
+<p>把它装到 nexu 里之后，agent 就多了一项能力：<strong>把任何主题变成多媒体内容。</strong></p>
+
+<p style="padding-top:20px;"><strong>第一步：安装 ListenHub CLI</strong></p>
+
+<div class="code-block">npm install -g https://github.com/marswaveai/listenhub-cli</div>
+
+<p>需要 Node.js >= 20。装完后运行 <code>listenhub auth login</code> 完成浏览器授权登录。</p>
+
+<p style="padding-top:20px;"><strong>第二步：一句话生成播客</strong></p>
+
+<p>对 nexu agent 说一句话：</p>
+
+<div class="quote-block">"帮我生成一个关于 Harness Engineering 的深度播客"</div>
+
+<p>agent 自动选择 <code>deep</code> 模式，先做深度调研，再生成对话脚本，最后合成音频。</p>
+
+<div class="screenshot"><img src="https://raw.githubusercontent.com/joeylee12629-star/article-assets/main/listenhub/screenshot_1.jpg" /></div>
+
+<p>5 分钟后拿到了一期 <strong>12 分钟的深度播客</strong>。两位主播（原野 & 高晴）从 DevOps 的痛点聊到 AI Agent 的操作系统，从云成本优化聊到工程师角色的转变，甚至还讨论了"信任债"这种前沿话题。</p>
+
+<div class="slide-img"><img src="https://assets.listenhub.ai/listenhub-public-prod/storybook/information_image/8156b956-f33a-4008-a4ec-668716e8b934.webp" /></div>
+
+<p style="padding-top:20px;"><strong>第三步：生成解说 PPT</strong></p>
+
+<p>继续对 agent 说："帮我把这个内容做成解说 PPT"。agent 调用 ListenHub 的 explainer 接口，生成一份<strong>带 AI 配图和配音的解说幻灯片</strong>：</p>
+
+<div class="screenshot"><img src="https://raw.githubusercontent.com/joeylee12629-star/article-assets/main/listenhub/screenshot_2.jpg" /></div>
+
+<p>生成的 5 页 PPT 覆盖了：</p>
+<p class="list-item"><span class="bold-num">1.</span> AI 奇点时刻 — 从工匠到系统导演</p>
+<p class="list-item"><span class="bold-num">2.</span> 代码洪流 — 传统 DevOps 的失控危机</p>
+<p class="list-item"><span class="bold-num">3.</span> 智能净化 — CI/CD 测试缩短 80% + 自动回滚</p>
+<p class="list-item"><span class="bold-num">4.</span> 云端降本 — AutoStopping 省 70%</p>
+<p class="list-item"><span class="bold-num">5.</span> 信任债 — Harness 作为 AI 的"精密马具"</p>
+
+<div class="slide-img"><img src="https://assets.listenhub.ai/listenhub-public-prod/storybook/information_image/364abc48-76c2-4904-ab7f-185a553fa95b.webp" /></div>
+
+<p style="padding-top:20px;"><strong>第四步：一键导出视频</strong></p>
+
+<p>PPT 生成后，agent 自动调用视频导出接口。<strong>15 秒后</strong>，一个完整的解说视频就出来了——slides 配上旁白配音，可以直接发到任何平台。</p>
+
+<div class="screenshot"><img src="https://raw.githubusercontent.com/joeylee12629-star/article-assets/main/listenhub/screenshot_3.jpg" /></div>
+
+<div class="slide-img"><img src="https://assets.listenhub.ai/listenhub-public-prod/storybook/information_image/ce8400d1-cfb7-4250-b447-784ac1f0cd45.webp" /></div>
+
+<!-- ===== 为什么在 Nexu 里用 ===== -->
+<div class="section-title"><img src="https://raw.githubusercontent.com/joeylee12629-star/article-assets/main/listenhub/section_3.jpg" /></div>
+
+<p>你可能会问：这些功能 ListenHub 网站上不也有吗？为什么要在 nexu 里用 CLI？</p>
+
+<p><strong>因为 agent 能帮你串起整个工作流。</strong></p>
+
+<p>我实际的使用过程就是一句话：</p>
+
+<div class="quote-block">"帮我生成一个关于 Harness Engineering 的解说播客"</div>
+
+<p>一句话。agent 自动完成了：<strong>安装 CLI → 登录授权 → 选择参数 → 生成播客 → 生成 PPT → 导出视频 → 部署预览页 → 把结果发给我。</strong></p>
+
+<p>我不需要记任何命令、任何参数、任何 API 文档。agent 都帮我处理了。</p>
+
+<p>这就是 nexu 的理念：<strong>AI 站在你旁边，帮你操控一切工具。</strong> 你只需要说你想要什么。</p>
+
+<!-- ===== 怎么开始 ===== -->
+<div class="section-title"><img src="https://raw.githubusercontent.com/joeylee12629-star/article-assets/main/listenhub/section_4.jpg" /></div>
+
+<p class="list-item"><span class="bold-num">1.</span> <strong>下载 Nexu</strong>（可一键安装的开源 OpenClaw 桌面客户端）：<a href="https://github.com/nexu-io/nexu/releases">github.com/nexu-io/nexu</a></p>
+<p class="list-item"><span class="bold-num">2.</span> <strong>安装 ListenHub CLI</strong>：<a href="https://github.com/marswaveai/listenhub-cli">github.com/marswaveai/listenhub-cli</a></p>
+<p class="list-item"><span class="bold-num">3.</span> <strong>获取 API Key</strong>：<a href="https://listenhub.ai/settings/api-keys">listenhub.ai/settings/api-keys</a></p>
+<p class="list-item"><span class="bold-num">4.</span> 对你的 nexu agent 说："帮我生成一个关于 XXX 的播客"</p>
+
+<p style="padding-top:8px;">就这么简单。</p>
+
+<div class="footer">
+<p><strong>加入社群，和我们一起玩 🦞</strong></p>
+</div>
+<div class="qr-wrap"><img src="https://raw.githubusercontent.com/joeylee12629-star/article-assets/main/listenhub/qr_community.jpg" /></div>
+
+</body>
+</html>
